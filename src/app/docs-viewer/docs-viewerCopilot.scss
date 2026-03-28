@@ -1,0 +1,181 @@
+/* ---------------------------------------------------------
+   GLOBAL LAYOUT
+--------------------------------------------------------- */
+
+app-docs-viewer {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.topContainer {
+  height: 12vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 0 10px;
+}
+
+/* ---------------------------------------------------------
+   THEME TOGGLE + HEADER
+--------------------------------------------------------- */
+
+.themeContainer {
+  margin-top: 10px;
+}
+
+.themaTogglebutton {
+  background: rgba(0, 255, 0, 0.8);
+  border-radius: 10px;
+  padding: 4px 10px;
+  display: flex;
+  align-items: center;
+}
+
+.themeTitle {
+  margin-left: 8px;
+  font-size: 14px;
+}
+
+.docId {
+  background: rgba(0, 255, 255, 0.8);
+  border-radius: 10px;
+  padding: 4px 10px;
+  margin-top: 10px;
+  display: inline-block;
+}
+
+.backToIndex,
+.backToPrevious {
+  position: absolute;
+  right: 10px;
+  padding: 4px 10px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.backToIndex {
+  top: 10px;
+  background: rgba(0, 255, 255, 0.8);
+}
+
+.backToPrevious {
+  top: 45px;
+  background: rgba(59, 215, 236, 0.8);
+}
+
+/* ---------------------------------------------------------
+   PROGRESS BAR
+--------------------------------------------------------- */
+
+.progress-bar {
+  width: 100%;
+  height: 4px;
+  background: #eee;
+  margin-top: 15px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #3f51b5;
+  transition: width 0.1s ease-out;
+}
+
+/* ---------------------------------------------------------
+   VIEWER + SCROLL RESTORATION
+--------------------------------------------------------- */
+
+.viewer-wrapper {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+}
+
+.viewer-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--background-color, white);
+  z-index: 10;
+  opacity: 1;
+  pointer-events: none;
+  transition: opacity 150ms ease-out;
+}
+
+.viewer-overlay.hidden {
+  opacity: 0;
+}
+
+.markdownViewer {
+  height: 100%;
+  overflow-y: auto;
+  padding: 0 16px;
+  box-sizing: border-box;
+  font-family: system-ui, sans-serif;
+  font-size: 16px;
+  border-radius: 8px;
+  transition: opacity 0.2s ease-out;
+}
+
+/* Hide viewer during scroll restoration */
+.markdownViewer.hidden-during-render {
+  visibility: hidden;
+  opacity: 0;
+}
+
+/* ---------------------------------------------------------
+   TABLES
+--------------------------------------------------------- */
+
+.markdownViewer .md-table-container {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.markdownViewer .md-table {
+  border-collapse: collapse;
+  width: fit-content;
+  font-size: 1rem;
+}
+
+.markdownViewer .md-table th {
+  background-color: var(--table-header-bg);
+}
+
+.markdownViewer .md-table th,
+.markdownViewer .md-table td {
+  border: 1px solid var(--table-border);
+  padding: 0.5rem;
+}
+
+.markdownViewer .md-table tr:nth-child(even) {
+  background-color: var(--table-bg-even);
+}
+
+.markdownViewer .md-table tr:nth-child(odd) {
+  background-color: var(--table-bg-odd);
+}
+
+/* ---------------------------------------------------------
+   INLINE HIGHLIGHT
+--------------------------------------------------------- */
+
+.markdownViewer .highlight {
+  background-color: rgb(219, 219, 22);
+  transition: background-color 0.7s ease-in-out;
+}
+
+/* ---------------------------------------------------------
+   MERMAID
+--------------------------------------------------------- */
+
+.markdownViewer .mermaid-container {
+  display: flex;
+  justify-content: center;
+  padding: 1em;
+}
+
+.markdownViewer .mermaid {
+  min-width: 50vw;
+}

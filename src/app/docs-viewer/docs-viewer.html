@@ -1,0 +1,34 @@
+<div class="topContainer">
+  <div class=" themeContainer">
+    <button class="mat-button themaTogglebutton" type="button" (click)="toggleTheme($event)">
+      <mat-icon class="mat-icon">{{ $isDarkMode() ? 'toggle_off' : 'toggle_on'}}</mat-icon>
+      <span class="themeTitle">Theme Color:&nbsp;{{$isDarkMode() ? 'Dark' : 'Light' }}</span>
+    </button>
+  </div>
+
+  <div>
+    <span class="docId">ID:{{this.$activeDocId().docId}} &nbsp; ─ &nbsp; {{docTitle}}</span>
+    <button class="backToIndex" type="button" (click)="backToIndex($event)"><strong>Back To Index</strong></button>
+    <button class="backToPrevious" type="button" (click)="backToPrevious($event)"><strong>Shortcut To Previous
+        Doc</strong></button>
+  </div>
+
+  <div class="progress-bar">
+    <div class="progress-fill" [style.width.%]="scrollService.scrollPercent()"></div>
+  </div>
+</div>
+<!--
+<div class="viewer-wrapper">
+  <div class="viewer-overlay">
+    <div class="markdownViewer" #markdownViewer></div>
+  </div>
+</div> -->
+
+
+<div class="viewer-wrapper">
+  <div class="viewer-overlay hidden"></div>
+  <div class="markdownViewer" #markdownViewer></div>
+</div>
+
+
+<!-- <div class="markdownViewer" #markdownViewer></div> -->
