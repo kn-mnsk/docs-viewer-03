@@ -1,1 +1,389 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+
+// @include mat.core();
+
+// @import 'tailwindcss/base';
+// @import 'tailwindcss/components';
+// @import 'tailwindcss/utilities';
+// @import 'tailwindcss/variants';
+
+/* ---------------------------------------------------------
+   Common
+--------------------------------------------------------- */
+
+html,
+body {
+  height: 100%;
+  // overflow: hidden; // add this
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  // overflow: hidden; // ensure only the markdownViewer scrolls
+  transition: background-color 0.7s ease-in-out, color 0.7s ease-in-out;
+}
+
+
+// add more natural easing curve
+/*
+Adds a subtle size change to prevent the transition from feeling static. ✅ Creates a more natural fade effect instead of a hard opacity shift.
+*/
+@keyframes fade-in {
+  // from {
+  //   opacity: 0;
+  // }
+  // to {
+  //   opacity: 1;
+  // }
+
+  0% {
+    opacity: 0;
+    transform: scale(0.98);
+    /* Slight shrink effect */
+  }
+
+  60% {
+    opacity: 0.5;
+    transform: scale(1.01);
+    /* Brief slight expansion */
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    /* Back to normal */
+  }
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+// Apply the variables to links
+a {
+  color: var(--link-color);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--link-hover-color);
+    text-decoration: underline;
+  }
+
+}
+
+
+/* ---------------------------------------------------------
+   Angular materials
+--------------------------------------------------------- */
+
+.mat-button,
+.mat-raised-button {
+  display: inline-block !important;
+}
+
+.mat-button {
+  animation: fade-in 0.4s ease-in-out;
+}
+
+.mat-icon {
+  // more interactive, and subtle animation effect when toggling themes:
+  // transform: rotate(180deg);
+  transition: color 0.4s ease-in-out opacity 0.4s ease-in-out;
+}
+
+
+// Improve Button Responsiveness with Hover Effects
+.mat-button:hover,
+.mat-raised-button:hover {
+  background-color: red !important;
+  transform: scale(1.1);
+  // transition: transform 0.3s ease-in-out;
+
+  box-shadow: 0px 0px 20px rgba(255, 0, 0, 0.5);
+}
+
+@include mat.core();
+
+
+/* ---------------------------------------------------------
+   Thema drak and light
+--------------------------------------------------------- */
+
+.theme-transition-overlay {
+  background: rgba(0, 0, 0, 0.4);
+  transition: background-color 0.8s ease-in-out;
+}
+
+/* Thema*/
+$dark-primary-text: white;
+$dark-theme: mat.m2-define-dark-theme((color: (primary: mat.m2-define-palette(mat.$m2-blue-palette, 700), accent: mat.m2-define-palette(mat.$m2-pink-palette, A200))));
+
+$light-primary-text: rgba(black, 0.87);
+$light-primary: mat.m2-define-palette(mat.$m2-pink-palette, 500);
+$light-accent: mat.m2-define-palette(mat.$m2-deep-purple-palette, A200, A100, A400);
+$light-theme: mat.m2-define-light-theme((color: (primary: $light-primary, accent: $light-accent, ), typography: mat.m2-define-typography-config(), density: 0, ));
+
+/*add a subtle gradient effect
+✅ Prevents harsh contrast shifts between themes.
+✅ Gives a softer gradient transition when switching modes.
+*/
+[data-theme="dark"] {
+  --background-color: #lelele; // for docs-viewer.ts
+  // --bg-color: #lelele;
+  --bg-color: rgba(0, 0, 0, 1.0);
+  // --bg-color: linear-gradient(180deg, #1a1a1a, #000000);
+  --text-color: white; //$dark-primary-text;
+  --link-color: lightblue;
+  --link-hover-color: cyan;
+
+  --table-bg-even: #1e1e1e;
+  --table-bg-odd: #111;
+  --table-border: #555;
+  --table-header-bg: #333;
+
+  @include mat.all-component-themes($dark-theme);
+}
+
+[data-theme="dark"] .mat-icon {
+  color: lightblue;
+}
+
+[data-theme="dark"] .mat-icon:hover {
+  // background-color: red !important;
+  transform: scale(1.5);
+  transition: transform 0.2s ease-in-out;
+  // transform: rotate(180deg);
+  /* Rotate for a smooth effect */
+  opacity: 0.8;
+}
+
+//https://github.com/angular/components/blob/15.2.9/guides/duplicate-theming-styles.md
+[data-theme="light"] {
+  // --bg-color: white;
+  --background-color: #ffffff; // for docs-viewer.ts
+  // --bg-color: #ffffff;
+  --bg-color: linear-gradient(180deg, #ffffff, #f0f0f0);
+  --text-color: $light-primary-text;
+  --link-color: blue;
+  --link-hover-color: darkblue;
+
+  --table-bg-even: #f9f9f9;
+  --table-bg-odd: #ffffff;
+  --table-border: #333;
+  --table-header-bg: #e0e0e0;
+
+  @include mat.all-component-colors($light-theme);
+}
+
+[data-theme="light"] .mat-icon {
+  color: darkblue;
+}
+
+[data-theme="light"] .mat-icon:hover {
+  transform: scale(1.5);
+  transition: transform 0.2s ease-in-out;
+  // transform: rotate(0deg);
+  opacity: 1;
+}
+
+/* Only fade the BODY, not the entire app */
+body[data-theme="dark"],
+body[data-theme="light"] {
+  opacity: 0;
+  animation: fade-in 0.7s forwards ease-in-out;
+}
+
+
+/* ---------------------------------------------------------
+   Katex
+--------------------------------------------------------- */
+
+/* Katex Stylesheet Trouble Shouting: refer to body in the index.html*/
+.katex-version {
+  display: none;
+}
+
+.katex-version::after {
+  content: "0.10.2 or earlier";
+}
+
+/* Katex CSS customization: refer to https://katex.org/docs/issues*/
+.katex-display {
+  overflow: auto hidden
+}
+
+.katex-display>.katex {
+  white-space: normal
+}
+
+/* Add space between broken lines: */
+.katex-display>.base {
+  margin: 0.25em 0
+}
+
+/* Compensate by reducing space around display math */
+.katex-display {
+  margin: 0.5em 0;
+}
+
+/* ---------------------------------------------------------
+   Marked
+--------------------------------------------------------- */
+
+.markdownViewer .md-table-container {
+  position: relative;
+  display: flex;
+  // left: 5em;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.markdownViewer .md-table {
+  border-collapse: collapse;
+  width: fit-content; //100%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  // padding: 5px;
+  font-size: 1rem;
+  border-radius: 3em;
+}
+
+.markdownViewer .md-table th {
+  // background-color: rgb(206, 14, 78);
+  background-color: var(--table-header-bg);
+}
+
+.markdownViewer .md-table th,
+.markdownViewer .md-table td {
+  border: 1px solid var(--table-border);
+  // border: 1px solid #1bee22;
+  padding: 0.5rem;
+  vertical-align: top;
+}
+
+.markdownViewer .md-table td {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.markdownViewer .md-table tr:nth-child(even) {
+  background-color: var(--table-bg-even);
+  // background-color: #05252e;
+  border-bottom: solid 1px rgb(227, 219, 219);
+}
+
+.markdownViewer .md-table tr:nth-child(odd) {
+  background-color: var(--table-bg-odd);
+  // background-color: #ce164a;
+  border-bottom: solid 1px rgb(227, 219, 219);
+}
+
+// temporary class: scroll by onClick function
+.markdownViewer .highlight {
+  background-color: rgb(219, 219, 22);
+  transition: background-color 0.7s ease-in-out, color 0.7s ease-in-out;
+  // transition: background-color 1.5s ease;
+}
+
+
+.markdownViewer .folder-container {
+  position: relative;
+  display: flex;
+  // left: 5em;
+  flex-direction: row;
+  justify-content: center;
+  width: stretch;
+}
+
+
+.markdownViewer .align-center25 {
+  position: relative;
+  left: 25%;
+}
+
+.markdownViewer .align-center15 {
+  position: relative;
+  left: 15%;
+}
+
+.markdownViewer .align-center10 {
+  position: relative;
+  left: 10%;
+}
+
+.markdownViewer .align-center7 {
+  position: relative;
+  left: 7%;
+}
+
+// .markdownViewer.hidden-during-render {
+//   visibility: hidden;
+//   // background-color: white;
+//   opacity: 0;
+// }
+
+
+/* ---------------------------------------------------------
+   Mermaid
+--------------------------------------------------------- */
+
+.markdownViewer .mermaid-container {
+  position: relative;
+  padding: 1em; // test
+  // background-color: rgb(227, 229, 233); // for debug use
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+}
+
+.markdownViewer .mermaid-container, .mermaid {
+  width: 80vw
+  // min-height: 70vh;
+  // min-width: 70vw;
+
+}
+
+.markdownViewer g text {
+  // .markdownViewer g .label-container {
+  // word-wrap: normal;
+  word-wrap: break-word;
+  // font-size: 10px;
+}
+
+
+
+/* ---------------------------------------------------------
+   Debug Tools for markdownViewer
+--------------------------------------------------------- */
+:root .dv-scroll-debug-overlay {
+  // html .dv-scroll-debug-overlay {
+  position: fixed;
+  top: 12px;
+  right: 250px;
+  background: rgba(35, 35, 35, 0.78);
+  color: #fff;
+  padding: 12px 16px;
+  border-radius: 6px;
+  font-size: 12px;
+  line-height: 1.4;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  z-index: 99999;
+
+  .dv-title {
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .dv-subtitle {
+    margin-top: 8px;
+    font-weight: 600;
+  }
+
+  &.visible {
+    opacity: 1;
+  }
+}
