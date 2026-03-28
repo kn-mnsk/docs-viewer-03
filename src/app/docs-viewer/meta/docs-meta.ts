@@ -124,6 +124,12 @@ export const DocsList: DocMeta[] = [
     "filetype": "md",
     "path": "app/docs-viewer/docs/supplements/doc-angular-0100.md",
   },
+  {
+    "id": "doc-ulde-0100",
+    "title": "ULDE Integration",
+    "filetype": "md",
+    "path": "app/docs-viewer/docs/supplements/doc-ulde-0100.md",
+  },
   // TypeScript
   {
     "id": "docs-meta",
