@@ -17,7 +17,39 @@ export const SESSION_STATE_DEFAULT: SessionState = {
   scrollPos: 0,
   refreshed: false,
 };
-// Session Satet
+// session state
+
+// plugin
+export interface PageContext {
+  pageId: string;
+  route: string;
+  frontmatter: Record<string, any>;
+  rawContent: string;
+}
+
+export interface RenderContext {
+  pageId: string;
+  ast: any;           // markdown/MDX/custom AST
+  html: string;       // intermediate or final
+  layout: string;     // layout identifier
+}
+
+export interface PluginHooks {
+  onInit?(): void | Promise<void>;
+  onPageLoad?(ctx: PageContext): void | Promise<void>;
+  onBeforeRender?(ctx: RenderContext): void | Promise<void>;
+  onAfterRender?(ctx: RenderContext): void | Promise<void>;
+  onDestroy?(): void | Promise<void>;
+}
+
+export interface DocsPlugin {
+  name: string;                 // required, namespaced
+  version?: string;             // optional
+  description?: string;         // optional
+  enabled?: boolean;            // default true
+  hooks: PluginHooks;           // lifecycle hooks
+}
+// plugin
 
 export interface DocMeta {
   id: string;
