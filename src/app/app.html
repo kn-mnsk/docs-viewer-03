@@ -1,8 +1,14 @@
 <div [class.hidden]="$isVisible()">
   <span> App </span>
-  <!-- <span> {{openedPage()}} </span> -->
 </div>
 
 <div [class.hidden]="!$isVisible()">
   <div docsViewerDirective [$inputDocId]="$docId()" #docsViewer></div>
 </div>
+
+<!--
+@if(!$isVisible()){
+<div docsViewerDirective [$inputDocId]="$docId()" #docsViewer></div>
+} @else {
+<span>App</span>
+} -->
