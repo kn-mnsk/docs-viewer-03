@@ -18,7 +18,7 @@ import { readSessionState, writeSessionState } from './docs-viewer/session-state
   styleUrl: './app.scss',
 })
 export class App implements AfterViewInit, OnDestroy {
-  protected readonly $title = signal('docs-viewer V1.1.0');
+  protected readonly $title = signal('docs-viewer03');
   private readonly $isBrowser = signal<boolean>(false);
 
   protected $isVisible = signal<boolean | undefined>(false);
