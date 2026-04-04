@@ -71,3 +71,6 @@ Plugins
 > --- 
 
 1. [ULDE Integratiom](#docId:doc-ulde-0100 "docId: doc-ulde-0100")
+2. [Unified Documentation + ULDE Lifecycle](#docId:doc-ulde-0110 "docId: doc-ulde-0110")
+3. [Plugin API Design](#docId:doc-ulde-0120 "docId: doc-ulde-0120")
+4. [Angular Integration — Where ULDE Lives in Your Real System](#docId:doc-ulde-0130 "docId: doc-ulde-0130")
