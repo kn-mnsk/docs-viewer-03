@@ -180,6 +180,24 @@ export const DocsList: DocMeta[] = [
     "filetype": "md",
     "path": "app/docs-viewer/docs/supplements/doc-ulde-0130.md",
   },
+  {
+    "id": "doc-ulde-0140",
+    "title": "Mapping docs-viewer into the ULDE architecture",
+    "filetype": "md",
+    "path": "app/docs-viewer/docs/supplements/doc-ulde-0140.md",
+  },
+  {
+    "id": "doc-ulde-0150",
+    "title": "ULDE Project Skeleton",
+    "filetype": "md",
+    "path": "app/docs-viewer/docs/supplements/doc-ulde-0150.md",
+  },
+  {
+    "id": "doc-ulde-0160",
+    "title": "Add a Real Layout Shell",
+    "filetype": "md",
+    "path": "app/docs-viewer/docs/supplements/doc-ulde-0160.md",
+  },
   // TypeScript
   {
     "id": "docs-meta",
