@@ -74,3 +74,6 @@ Plugins
 2. [Unified Documentation + ULDE Lifecycle](#docId:doc-ulde-0110 "docId: doc-ulde-0110")
 3. [Plugin API Design](#docId:doc-ulde-0120 "docId: doc-ulde-0120")
 4. [Angular Integration — Where ULDE Lives in Your Real System](#docId:doc-ulde-0130 "docId: doc-ulde-0130")
+5. [Map Your Existing Documentation System Into the ULDE Architecture](#docId:doc-ulde-0140 "docId: doc-ulde-0140")
+6. [ULDE Project Sleleton](#docId:doc-ulde-0150 "docId: doc-ulde-0150")
+7. [Add a Real Layout Shell - Sidebar, Header, Toc, Content Area](#docId:doc-ulde-0160 "docId: doc-ulde-0160")
