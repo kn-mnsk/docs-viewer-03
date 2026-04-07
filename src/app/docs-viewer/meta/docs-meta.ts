@@ -198,6 +198,18 @@ export const DocsList: DocMeta[] = [
     "filetype": "md",
     "path": "app/docs-viewer/docs/supplements/doc-ulde-0160.md",
   },
+  {
+    "id": "doc-ulde-0170",
+    "title": "Add a Markdown Rendering Plugin",
+    "filetype": "md",
+    "path": "app/docs-viewer/docs/supplements/doc-ulde-0170.md",
+  },
+  {
+    "id": "doc-ulde-0180",
+    "title": "Add a Mermaid Rendering Plugin",
+    "filetype": "md",
+    "path": "app/docs-viewer/docs/supplements/doc-ulde-0180.md",
+  },
   // TypeScript
   {
     "id": "docs-meta",
