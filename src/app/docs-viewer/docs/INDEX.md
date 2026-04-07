@@ -77,3 +77,5 @@ Plugins
 5. [Map Your Existing Documentation System Into the ULDE Architecture](#docId:doc-ulde-0140 "docId: doc-ulde-0140")
 6. [ULDE Project Sleleton](#docId:doc-ulde-0150 "docId: doc-ulde-0150")
 7. [Add a Real Layout Shell - Sidebar, Header, Toc, Content Area](#docId:doc-ulde-0160 "docId: doc-ulde-0160")
+8. [Add a Markdown Rendering Plugin](#docId:doc-ulde-0170 "docId: doc-ulde-0170")
+9. [Add a Mermaid Rendering Plugin](#docId:doc-ulde-0180 "docId: doc-ulde-0180")

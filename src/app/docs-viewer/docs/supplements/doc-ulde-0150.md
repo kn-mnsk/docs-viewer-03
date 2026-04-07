@@ -17,52 +17,67 @@ Here is the ULDE‑aligned Angular‑correct structure:
 ```
 ulde-docs/
 ├── src/
-│   ├── main.ts
-│   ├── index.html
-│   ├── styles.scss
 │   ├── app/
 │   │   ├── app.config.ts
 │   │   ├── app.routes.ts
 │   │   ├── app.ts
 │   │   ├── app.html
 │   │   ├── app.scss
-│   │   │
-│   │   ├── ulde/
-│   │   │   ├── core/
-│   │   │   │   ├── content-engine/
-│   │   │   │   ├── layout-engine/
-│   │   │   │   ├── interactive-engine/
-│   │   │   │   └── ulde/
-│   │   │   │       ├── ulde.ts
-│   │   │   │       ├── ulde-context.ts
-│   │   │   │       └── ulde.types.ts
-│   │   │   │
-│   │   │   ├── plugin-system/
-│   │   │   │   ├── registry/
-│   │   │   │   ├── hooks/
-│   │   │   │   └── plugins/
-│   │   │   │
-│   │   │   ├── angular/
-│   │   │   │   ├── ulde-viewer/
-│   │   │   │   │   ├── ulde-viewer.ts
-│   │   │   │   │   ├── ulde-viewer.html
-│   │   │   │   │   └── ulde-viewer.scss
-│   │   │   │   └── ulde.service.ts
-│   │   │   │
-│   │   │   └── utils/
-│   │   │       ├── dom/
-│   │   │       ├── timing/
-│   │   │       └── logging/
-│   │   │
-│   │   └── pages/
-│   │       ├── home/
-│   │       └── docs/
+│   │   ├── pages/
+│   │   │   ├── home/
+│   │   │   └── docs/
+│   │   └── ulde/
+│   │       ├── core/
+│   │       │   ├── content-engine/
+│   │       │   │   └── content-engine.ts
+│   │       │   ├── layout-engine/
+│   │       │   │   └── layout-engine.ts
+│   │       │   ├── interactive-engine/
+│   │       │   │   └── interactive-engine.ts
+│   │       │   └── ulde/
+│   │       │       ├── ulde.ts
+│   │       │       ├── ulde-context.ts
+│   │       │       └── ulde.types.ts
+│   │       │
+│   │       ├── plugin-system/
+│   │       │   ├── registry/
+│   │       │   │   └── plugin-registry.ts
+│   │       │   ├── hooks/
+│   │       │   │   └── plugin-phases.ts
+│   │       │   └── plugins/
+│   │       │       └── heading-anchors/
+│   │       │           └── heading-anchors.plugin.ts
+│   │       │
+│   │       ├── angular/
+│   │       │   ├── ulde-layout-shell/
+│   │       │   │   ├── ulde-layout-shell.ts
+│   │       │   │   ├── ulde-layout-shell.html
+│   │       │   │   └── ulde-layout-shell.scss
+│   │       │   ├── ulde-viewer/
+│   │       │   │   ├── ulde-viewer.ts
+│   │       │   │   ├── ulde-viewer.html
+│   │       │   │   └── ulde-viewer.scss
+│   │       │   └── ulde.service.ts
+│   │       │
+│   │       └── utils/
+│   │           ├── dom/
+│   │           ├── timing/
+│   │           │   └── timing.plugin.ts
+│   │           └── logging/
 │   │
-│   └── assets/
-│       └── docs/
-│           └── markdown files, images, etc.
-│
-└── README.md
+│   ├── assets/
+│   │    ├── docs/
+│   │    │   ├── getting-started.md
+│   │    │   └── index.md
+│   │    └── images/
+│   │
+│   ├── index.html
+...
+│   └── styles.scss
+...
+├── README.md
+...
+
 
 ```
 
