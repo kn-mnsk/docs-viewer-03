@@ -19,6 +19,9 @@ function renderSpecialBlock(lang: string, text: string): any {
   pre.textContent = text;
 
   div.appendChild(pre);
+
+  console.log(`Log: marked.renderer.ts markedHtmlRenderer code=`, div);
+
   return div.outerHTML;
 };
 
@@ -41,7 +44,7 @@ export const markedStringRenderer: any = {
 
   code(token: Tokens.Code) {
     const lang = token.lang || "plaintext"; // Default to plaintext
-    
+
     if (lang === 'mermaid' || lang === 'folder') {
       return renderSpecialBlock(lang, token.text);
     }
