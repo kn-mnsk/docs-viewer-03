@@ -79,3 +79,15 @@ Plugins
 7. [Add a Real Layout Shell - Sidebar, Header, Toc, Content Area](#docId:doc-ulde-0160 "docId: doc-ulde-0160")
 8. [Add a Markdown Rendering Plugin](#docId:doc-ulde-0170 "docId: doc-ulde-0170")
 9. [Add a Mermaid Rendering Plugin](#docId:doc-ulde-0180 "docId: doc-ulde-0180")
+
+
+Plugins Vesrion 2
+---
+> --- 
+
+1. [ULDE v2 Project](#docId:doc-ulde2-0200 "docId: doc-ulde2-0200")
+2. [Implement plugin-registry.ts](#docId:doc-ulde2-0210 "docId: doc-ulde2-0210")
+3. [Implement content-engine.ts](#docId:doc-ulde2-0220 "docId: doc-ulde2-0220")
+4. [Wire ContentEngine into UldeService](#docId:doc-ulde2-0222 "docId: doc-ulde2-0222")
+5. [Implement the full &lt;ulde-viewer> component](#docId:doc-ulde2-0230 "docId: doc-ulde2-0230")
+6. [DOM Plugin API + Debug Overlay](#docId:doc-ulde2-0240 "docId: doc-ulde2-0240")

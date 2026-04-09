@@ -210,6 +210,42 @@ export const DocsList: DocMeta[] = [
     "filetype": "md",
     "path": "app/docs-viewer/docs/supplements/doc-ulde-0180.md",
   },
+  {
+    "id": "doc-ulde2-0200",
+    "title": "ULDE v2 Project",
+    "filetype": "md",
+    "path": "app/docs-viewer/docs/supplements/doc-ulde2-0200.md",
+  },
+  {
+    "id": "doc-ulde2-0210",
+    "title": "Ilpment plugin-registry.ts",
+    "filetype": "md",
+    "path": "app/docs-viewer/docs/supplements/doc-ulde2-0210.md",
+  },
+  {
+    "id": "doc-ulde2-0220",
+    "title": "Implement content-engine.ts",
+    "filetype": "md",
+    "path": "app/docs-viewer/docs/supplements/doc-ulde2-0220.md",
+  },
+  {
+    "id": "doc-ulde2-0222",
+    "title": "Wire ContentEngine into UldeService",
+    "filetype": "md",
+    "path": "app/docs-viewer/docs/supplements/doc-ulde2-0222.md",
+  },
+  {
+    "id": "doc-ulde2-0230",
+    "title": "Implement the full <ulde-viewer> component",
+    "filetype": "md",
+    "path": "app/docs-viewer/docs/supplements/doc-ulde2-0230.md",
+  },
+  {
+    "id": "doc-ulde2-0240",
+    "title": "DOM Plugin API + Debug Overlay",
+    "filetype": "md",
+    "path": "app/docs-viewer/docs/supplements/doc-ulde2-0240.md",
+  },
   // TypeScript
   {
     "id": "docs-meta",
