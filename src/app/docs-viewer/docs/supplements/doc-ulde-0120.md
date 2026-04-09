@@ -51,6 +51,55 @@ export interface PluginHooks {
 }
 ```
 
+## 2. ULDE plugin lifecycle diagram (textual)
+
+Think of the lifecycle like this:
+
+1. Content phase
+
+>- ContentEngine.load(path) → raw markdown
+>- Plugins with phase: 'content' can mutate ctx.raw
+
+2. Markdown phase (inside ContentEngine)
+
+>- renderMarkdown(ctx.raw) → HTML
+>- ctx.html now contains HTML from markdown-it
+
+3. Post-content phase
+
+>- Plugins with phase: 'post-content' (e.g., heading anchors) mutate ctx.html
+
+4. Layout phase
+
+>- LayoutEngine.renderShell(ctx.html) (or pass-through if Angular handles shell)
+
+5. Interactive phase
+
+>- Plugins with phase: 'interactive' (e.g., Mermaid plugin) transform HTML strings
+>- Here we convert <pre><code class="language-mermaid"> → <div class="mermaid">
+
+6. Instrumentation phase
+
+>- Plugins with phase: 'instrumentation' log timings, metrics, etc.
+
+7. Angular integration
+
+>- UldeViewer.load() gets ctx.html
+>- Sanitizes and sets html signal
+>- Angular renders [innerHTML]="html" into DOM
+
+8. DOM-based interactive layer (Mermaid)
+
+>- Angular effect or UldeMermaidDirective runs
+>- Mermaid scans .mermaid in the real DOM
+>- Diagrams render
+
+So Mermaid is conceptually a two-part integration:
+
+- ULDE plugin: string → <div class="mermaid">…</div>
+- Angular layer: DOM → Mermaid render
+
+
 __Why this works__
 
 - Every hook is optional

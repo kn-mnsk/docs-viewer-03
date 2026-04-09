@@ -17,12 +17,50 @@ This plugin will:
 - avoid SSR issues
 - integrate cleanly into the ULDE lifecycle
 
-## 1. Install Mermaid
+## 1. Mermaid = DOM‑based renderer (post‑DOM phase)
+
+### architectural clarity
+
+__Layer 1 — ULDE (string world)__
+
+- markdown-it → HTML
+- plugins → transform HTML
+- no DOM access
+- no Mermaid rendering
+
+__Layer 2 — Angular (DOM world)__
+
+- sanitizes or trusts HTML
+- inserts HTML into DOM
+- triggers effects on DOM updates
+
+__Layer 3 — Mermaid (post-DOM world)__
+
+- scans real DOM
+- renders diagrams
+- injects SVG
+
+So that,
+Mermaid:
+
+- scans the real DOM (document.querySelectorAll)
+- replaces elements with SVG
+- cannot run on strings
+- cannot run inside ULDE
+- must run after Angular inserts HTML
+
+So Mermaid belongs in:
+
+__✔ Angular effect()__
+__✔ Angular directive__
+__❌ NOT inside ULDE__
+
+## 2. Install Mermaid
 ```
 npm install mermaid
 ```
 
-## 2. Create the Mermaid Plugin
+## 3. Create the Mermaid Plugin
 
 Create:
 ```
@@ -30,33 +68,107 @@ src/app/ulde/plugin-system/plugins/mermaid/mermaid.plugin.ts
 ```
 __mermaid.plugin.ts__
 ```ts
-import mermaid from 'mermaid';
 import { UldePlugin } from '../../registry/plugin-registry';
 
 export const MermaidPlugin: UldePlugin = {
   name: 'mermaid',
-  phase: 'interactive',   // render AFTER HTML is in place
+  phase: 'interactive',
   async run(ctx) {
-    // 1. Replace ```mermaid code blocks with <div class="mermaid">...</div>
     ctx.html = ctx.html.replace(
-      /```mermaid([\s\S]*?)```/g,
+      /<pre><code class="language-mermaid">([\s\S]*?)<\/code><\/pre>/g,
       (match, code) => {
-        return `<div class="mermaid">${code.trim()}</div>`;
+        const decoded = code
+          .replace(/&lt;/g, '<')
+          .replace(/&gt;/g, '>')
+          .replace(/&amp;/g, '&');
+
+        return `<div class="mermaid">${decoded.trim()}</div>`;
       }
     );
-
-    // 2. Mermaid must run only in the browser
-    if (typeof window === 'undefined') return;
-
-    // 3. Initialize Mermaid (safe to call multiple times)
-    try {
-      mermaid.initialize({ startOnLoad: false });
-      await mermaid.run();
-    } catch (err) {
-      console.error('[ULDE Mermaid Plugin] Failed to render diagram:', err);
-    }
   }
 };
+
+```
+
+## 4. Angular side: run Mermaid after DOM updates.
+
+__ulde-viewer.ts (core parts):__
+```ts
+import { Component, signal, Inject, inject, AfterViewInit, OnDestroy, PLATFORM_ID, effect,  } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import mermaid from 'mermaid';
+import { Ulde } from '../../core/ulde/ulde';
+import { UldeLayoutShell } from '../ulde-layout-shell/ulde-layout-shell';
+
+@Component({
+  selector: 'ulde-viewer',
+  imports: [UldeLayoutShell],
+  templateUrl: './ulde-viewer.html',
+  styleUrls: ['./ulde-viewer.scss'],
+  standalone: true
+})
+export class UldeViewer implements AfterViewInit, OnDestroy {
+  html = signal<SafeHtml | string>('');
+  private ulde = inject(Ulde);
+  private sanitizer = inject(DomSanitizer);
+  private $isBrowser = signal<boolean>(false);
+
+  private stopEffect?: EffectRef;
+
+  constructor(@Inject(PLATFORM_ID) platformId: Object) {
+    this.$isBrowser.set(isPlatformBrowser(platformId));
+
+    // react to html() changes and run Mermaid after DOM updates
+    this.stopEffect = effect(() => {
+      if (!this.$isBrowser()) return;
+      const current = this.html();
+      if (!current) return;
+
+      queueMicrotask(async () => {
+        try {
+          mermaid.initialize({ startOnLoad: false });
+          await mermaid.run({ querySelector: '.mermaid' });
+        } catch (err) {
+          console.error('[UldeViewer] Mermaid render error:', err);
+        }
+      });
+    });
+  }
+
+  ngAfterViewInit(): void {
+    if (!this.$isBrowser()) return;
+    this.load('index.md');
+  }
+
+  ngOnDestroy(): void {
+    this.stopEffect?.destroy();
+  }
+
+  async load(path: string) {
+    const ctx = await this.ulde.render(path);
+    const safe = this.sanitizer.bypassSecurityTrustHtml(ctx.html);
+    this.html.set(safe);
+  }
+}
+
+```
+
+__ulde-layout-shell.ts:__
+```ts
+import { Component, input } from '@angular/core';
+import { SafeHtml } from '@angular/platform-browser';
+
+@Component({
+  selector: 'app-ulde-layout-shell',
+  imports: [],
+  templateUrl: './ulde-layout-shell.html',
+  styleUrl: './ulde-layout-shell.scss',
+})
+export class UldeLayoutShell {
+  html = input<SafeHtml|string>('');
+}
+
 ```
 
 __Why this works__
