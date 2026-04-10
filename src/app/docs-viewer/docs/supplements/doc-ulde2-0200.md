@@ -30,28 +30,27 @@ src/app/
 │   │   ├── content-engine/
 │   │   │   └── content-engine.ts
 │   │   ├── layout-engine/
-│   │   │   └── layout-engine.ts
+│   │   │   └── layout-engine.ts // empity stub
 │   │   ├── interactive-engine/
-│   │   │   └── interactive-engine.ts
+│   │   │   └── interactive-engine.ts // empity stub
 │   │   └── runtime/
-│   │       ├── ulde.ts
-│   │       ├── ulde-context.ts
 │   │       └── ulde.types.ts
 │   │
 │   ├── plugin-system/
 │   │   ├── registry/
 │   │   │   └── plugin-registry.ts
 │   │   ├── hooks/
-│   │   │   └── plugin-phases.ts
 │   │   └── plugins/
 │   │       ├── heading-anchors/
 │   │       │   └── heading-anchors.plugin.ts
+│   │       ├── katex/
+│   │       │   └── katex.plugin.ts
 │   │       └── markdown/
 │   │           └── markdown.plugin.ts
 │   │
 │   ├── angular/
 │   │   ├── ulde-debug-overlay/
-│   │   │   ├── ulde-debug-overlayt.ts
+│   │   │   ├── ulde-debug-overlay.ts
 │   │   │   ├── ulde-debug-overlay.html
 │   │   │   └── ulde-debug-overlay.scss
 │   │   ├── ulde-layout-shell/
