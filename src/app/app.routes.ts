@@ -7,7 +7,7 @@ export const routes: Routes = [
   {
     path: 'home',
     // title: docsTitleResolver,
-    title: 'home',
+    title: 'home-DocsViewerV3',
     loadComponent:  () => import('./app').then(m => m.App)
   },
   {
