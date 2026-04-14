@@ -1,8 +1,6 @@
 Index (ID: index)
 =================
 
----
-
 Angular README
 --------------
 
