@@ -41,7 +41,7 @@ export class KatexService {
         errorCallback: (err) => {
           console.error('Error in katex-render.service renderMathInElement', JSON.stringify(`${err}`));
         },
-        throwOnError: true,
+        throwOnError: false,
         errorColor: "#ff0000",
         output: "mathml",
 
